@@ -1,0 +1,56 @@
+Bài 6.1:
+Câu hỏi 1: What happens if users choose “Cancel”? 
+Khi người dùng chọn "Cancel", giá trị của option sẽ là JOptionPane.CANCEL_OPTION (giá trị là 2).
+
+- Trong chương trình hiện tại, chỉ có hai trường hợp được xử lý: YES_OPTION và NO_OPTION. Do đó, nếu người dùng chọn "Cancel", chương trình sẽ hiển thị thông báo "You've chosen: No" vì điều kiện (option == JOptionPane.YES_OPTION ? "Yes" : "No") sẽ trả về "No" khi option không phải là YES_OPTION.
+
+Câu hỏi 2: How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do” and “I don’t” (Suggestion: Use Javadocs or using Eclipse/Netbean IDE help). 
+
+- Để tùy chỉnh các tùy chọn, bạn có thể sử dụng phương thức JOptionPane.showOptionDialog. Phương thức này cho phép bạn chỉ định các tùy chọn tùy chỉnh và nhãn của chúng. 
+
+Ví dụ 1: Chỉ có hai tùy chọn "Yes" và "No":
+
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+    public static void main(String[] args) {
+        Object[] options = {"Yes", "No"};
+        int option = JOptionPane.showOptionDialog(null,
+                "Do you want to change to the first class ticket?",
+                "Choose an option",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+
+        JOptionPane.showMessageDialog(null, "You've chosen: "
+                + (option == JOptionPane.YES_OPTION ? "Yes" : "No"));
+
+        System.exit(0);
+    }
+}
+
+Ví dụ 2: Tùy chỉnh nhãn "I do" và "I don’t":
+
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+    public static void main(String[] args) {
+        Object[] options = {"I do", "I don’t"};
+        int option = JOptionPane.showOptionDialog(null,
+                "Do you want to change to the first class ticket?",
+                "Choose an option",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+
+        JOptionPane.showMessageDialog(null, "You've chosen: "
+                + (option == JOptionPane.YES_OPTION ? "I do" : "I don’t"));
+
+        System.exit(0);
+    }
+}
+

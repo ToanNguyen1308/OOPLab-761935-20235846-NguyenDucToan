@@ -1,0 +1,80 @@
+14. Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number
+of arguments for dvd. Compared to an array parameter. What do you prefer in this case?
+
+Sử dụng varargs thuận tiện hơn vì:
+a. Không cần phải tạo mảng trước khi gọi phương thức
+b. Có thể truyền số lượng tham số tùy ý (0, 1, 2, ...)
+c. Cú pháp gọi phương thức đơn giản và trực quan hơn
+d. Xử lý nội bộ tương tự như mảng nhưng có giao diện người dùng thân thiện hơn
+	
+        
+10. Create Constructor method
+
+Question:
+- If you create a constructor method to build a DVD by title then create a constructor method to build
+a DVD by category. Does JAVA allow you to do this?
+
+Answer:
+Java cho phép tạo nhiều constructor với tham số khác nhau (Overloading).
+
+Không cho phép nếu các constructor có cùng kiểu và số lượng tham số (vd: cùng (String)).
+
+Giải pháp: Thay đổi số lượng/thứ tự/kiểu tham số để Java phân biệt được.
+
+
+15. Passing parameter
+
+1. After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two
+objects still remain?
+
+a. lý do:
+
+- Java truyền tham số bằng giá trị, nghĩa là khi gọi swap(jungleDVD, cinderellaDVD), Java chỉ sao chép địa chỉ tham chiếu của jungleDVD và cinderellaDVD vào o1 và o2.
+
+- Khi bạn hoán đổi o1 và o2, bạn chỉ thay đổi bản sao của tham chiếu trong phương thức swap, không ảnh hưởng đến biến gốc (jungleDVD và cinderellaDVD).
+
+- Kết quả: Sau khi swap() kết thúc, jungleDVD và cinderellaDVD vẫn giữ nguyên giá trị ban đầu.
+
+b. Hình ảnh minh họa:
+
+Ban đầu:
+jungleDVD    → DVD("Jungle")  
+cinderellaDVD → DVD("Cinderella")
+
+Trong swap():
+o1 (bản sao của jungleDVD)    → DVD("Jungle")  
+o2 (bản sao của cinderellaDVD) → DVD("Cinderella")  
+
+Sau swap():
+o1 → DVD("Cinderella")  
+o2 → DVD("Jungle")  
+
+Nhưng khi kết thúc swap(), jungleDVD và cinderellaDVD vẫn trỏ đến đối tượng ban đầu:
+jungleDVD    → DVD("Jungle")  
+cinderellaDVD → DVD("Cinderella")  
+
+2. After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is
+the title of the JungleDVD changed?
+
+a. lý do:
+
+- Khi gọi changeTitle(jungleDVD, cinderellaDVD.getTitle()), Java truyền bản sao tham chiếu của jungleDVD vào dvd.
+
+- dvd.setTitle(title) thay đổi trực tiếp thuộc tính title của đối tượng mà jungleDVD đang trỏ đến → Ảnh hưởng đến đối tượng gốc.
+
+- dvd = new DigitalVideoDisc(oldTitle) chỉ gán lại tham chiếu bản sao dvd (không ảnh hưởng đến jungleDVD).
+
+b. Hình ảnh minh họa:
+
+Ban đầu:
+jungleDVD → DVD("Jungle")  
+
+Trong changeTitle():
+dvd (bản sao của jungleDVD) → DVD("Jungle")  
+
+Sau dvd.setTitle("Cinderella"):
+dvd → DVD("Cinderella")  // Đối tượng gốc bị thay đổi  
+
+Sau dvd = new DigitalVideoDisc("Jungle"):
+dvd → DVD("Jungle") (đối tượng mới)  
+Nhưng jungleDVD vẫn trỏ đến DVD("Cinderella")

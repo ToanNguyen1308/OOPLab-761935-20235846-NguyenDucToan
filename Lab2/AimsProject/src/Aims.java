@@ -17,6 +17,21 @@ public class Aims {
 				DigitalVideoDisc dvd3 = new DigitalVideoDisc(
 					        "Aladin", "Animation", "John Musker", 90, 18.99f);
 				anOrder.addDigitalVideoDisc(dvd3);
+
+				// Hiển thị giỏ hàng trước khi xóa
+				System.out.println("GIỎ HÀNG BAN ĐẦU:");
+				anOrder.displayCart();
+
+				System.out.println("\nXÓA DVD \"Aladin\" KHỎI GIỎ HÀNG...");
+				if (anOrder.removeDigitalVideoDisc(dvd3)) {
+					System.out.println("Đã xóa DVD \"Aladin\" thành công!");
+				} else {
+					System.out.println("Không thể xóa DVD \"Aladin\"!");
+				}
+
+				 // Hiển thị giỏ hàng sau khi xóa
+				 System.out.println("\nGIỎ HÀNG SAU KHI XÓA:");
+				 anOrder.displayCart();
 		
 				// Print total cost
 				System.out.println("Total Cost is: ");

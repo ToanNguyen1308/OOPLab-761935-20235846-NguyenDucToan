@@ -16,6 +16,51 @@ public class Cart {
             return false;
         }
     }
+
+    public int addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        int addedCount = 0;
+        for (DigitalVideoDisc disc : dvdList) {
+            if (qtyOrdered < MAX_NUMBERS_ORDERED) {
+                itemsOrdered[qtyOrdered] = disc;
+                qtyOrdered++;
+                addedCount++;
+                System.out.println("The disc \"" + disc.getTitle() + "\" has been added");
+            } else {
+                System.out.println("The cart is almost full. Cannot add more discs.");
+                break;
+            }
+        }
+        return addedCount;
+    }
+
+    
+
+    public int addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        int addedCount = 0;
+        
+        // Thêm đĩa thứ nhất
+        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
+            itemsOrdered[qtyOrdered] = dvd1;
+            qtyOrdered++;
+            addedCount++;
+            System.out.println("The disc \"" + dvd1.getTitle() + "\" has been added");
+        } else {
+            System.out.println("The cart is almost full. Cannot add more discs.");
+            return addedCount;
+        }
+        
+        // Thêm đĩa thứ hai
+        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
+            itemsOrdered[qtyOrdered] = dvd2;
+            qtyOrdered++;
+            addedCount++;
+            System.out.println("The disc \"" + dvd2.getTitle() + "\" has been added");
+        } else {
+            System.out.println("The cart is almost full. Cannot add more discs.");
+        }
+        
+        return addedCount;
+    }
   
     public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {
@@ -56,6 +101,10 @@ public class Cart {
         System.out.println("---------------------------------");
         System.out.printf("%-24s %8.2f\n", "Tổng cộng", totalCost());
         System.out.println("---------------------------------");
+    }
+
+    public DigitalVideoDisc[] getItemsOrdered() {
+        return itemsOrdered;
     }
 
 }

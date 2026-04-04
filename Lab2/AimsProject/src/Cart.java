@@ -32,7 +32,6 @@ public class Cart {
         return false;
     }
     
-    
   
     public float totalCost() {
         float total = 0.0f;
@@ -42,5 +41,21 @@ public class Cart {
         return total;
     }
     
+    public void displayCart() {
+        System.out.println("---------------------------------");
+        System.out.println("DANH SÁCH CÁC MỤC TRONG GIỎ HÀNG:");
+        System.out.println("---------------------------------");
+        System.out.printf("%-3s %-20s %8s\n", "STT", "Tên phim", "Giá");
+        
+        for (int i = 0; i < qtyOrdered; i++) {
+            System.out.printf("%-3d %-20s %8.2f\n", (i+1), 
+                    itemsOrdered[i].getTitle(), 
+                    itemsOrdered[i].getCost());
+        }
+        
+        System.out.println("---------------------------------");
+        System.out.printf("%-24s %8.2f\n", "Tổng cộng", totalCost());
+        System.out.println("---------------------------------");
+    }
 
 }

@@ -1,4 +1,4 @@
-public class Cart {
+public class Cart2 {
     public static final int MAX_NUMBERS_ORDERED = 20;
     private final DigitalVideoDisc itemsOrdered[] = 
         new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
@@ -16,10 +16,10 @@ public class Cart {
             return false;
         }
     }
-
-    public int addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+    
+    public int addDigitalVideoDisc(DigitalVideoDisc... discs) {
         int addedCount = 0;
-        for (DigitalVideoDisc disc : dvdList) {
+        for (DigitalVideoDisc disc : discs) {
             if (qtyOrdered < MAX_NUMBERS_ORDERED) {
                 itemsOrdered[qtyOrdered] = disc;
                 qtyOrdered++;
@@ -32,9 +32,8 @@ public class Cart {
         }
         return addedCount;
     }
-
     
-
+    
     public int addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
         int addedCount = 0;
         
@@ -61,11 +60,12 @@ public class Cart {
         
         return addedCount;
     }
+    
   
     public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i].equals(disc)) {
-
+                // Shift elements to remove the disc
                 for (int j = i; j < qtyOrdered - 1; j++) {
                     itemsOrdered[j] = itemsOrdered[j + 1];
                 }
@@ -77,6 +77,7 @@ public class Cart {
         return false;
     }
     
+    
   
     public float totalCost() {
         float total = 0.0f;
@@ -86,6 +87,7 @@ public class Cart {
         return total;
     }
     
+
     public void displayCart() {
         System.out.println("---------------------------------");
         System.out.println("DANH SÁCH CÁC MỤC TRONG GIỎ HÀNG:");
@@ -102,9 +104,4 @@ public class Cart {
         System.out.printf("%-24s %8.2f\n", "Tổng cộng", totalCost());
         System.out.println("---------------------------------");
     }
-
-    public DigitalVideoDisc[] getItemsOrdered() {
-        return itemsOrdered;
-    }
-
 }

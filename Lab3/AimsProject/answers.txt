@@ -1,0 +1,71 @@
+16.Polymorphism with toString() method
+     Reading Assignment
+1.What are the advantages of Polymorphism?
+
+	Cho phép một interface nhưng nhiều cách triển khai khác nhau, giúp code linh hoạt và dễ mở rộng.
+
+	Giảm sự phụ thuộc giữa các module, tăng tính tái sử dụng và dễ bảo trì.
+
+	Cho phép runtime binding: phương thức được gọi sẽ là phương thức tương ứng với đối tượng thực tế.
+
+	Giảm sự trùng lặp code, tận dụng được các method chung từ lớp cha.
+
+	
+2.	How is Inheritance useful to achieve Polymorphism in Java?
+
+	Inheritance cho phép các subclass kế thừa method và thuộc tính của superclass.
+
+	Khi một subclass override lại method từ superclass, ta có thể sử dụng phương thức đó thông qua reference của superclass nhưng thực 	tế sẽ thực thi phương thức của subclass (runtime polymorphism).
+
+	Ví dụ:
+
+	Media m = new DigitalVideoDisc();
+	m.play(); // Gọi play() của DigitalVideoDisc chứ không phải của Media
+
+
+3.	What are the differences between Polymorphism and Inheritance in Java?
+
+Inheritance							      |	Polymorphism
+Là quan hệ kế thừa giữa các lớp					      | Là khả năng nhiều đối tượng có thể sử dụng cùng interface với cách 								      |	thực thi khác nhau
+Cho phép subclass kế thừa thuộc tính và phương thức từ superclass     |	Cho phép dùng chung method signature nhưng có cách thực thi khác 								      | nhau
+Dùng để tái sử dụng code và mở rộng hệ thống			      |	Dùng để tăng tính linh hoạt, runtime binding
+
+17.	Sort media in the cart
+
+1.What class should implement the Comparable interface?
+	Lớp Media nên implements Comparable<Media> vi:
+
+	+ Media là lớp cha chung của DVD, CD, Book nên khi sắp xếp ArrayList<Media> chứa nhiều loại media khác nhau, chỉ cần 1 	compareTo() trong Media.
+	+ Tiêu chí sắp xếp mặc định (theo title và cost) là thuộc tính chung của Media, nên hợp lý nhất đặt compareTo() ở đây.
+	+ Nếu cần sắp xếp riêng cho DVD hay CD, có thể tạo Comparator riêng cho từng loại mà không ảnh hưởng compareTo() mặc định.
+	+ Nếu để compareTo() ở lớp con thì không thể sắp xếp danh sách hỗn hợp Media được.
+2.In those classes, how should you implement the compareTo()method to reflect the ordering that we want
+	Trong Media, phương thức compareTo() sẽ sắp xếp theo title trước, nếu bằng nhau thì sắp xếp theo cost (giảm dần). 
+	Ví dụ:
+	
+	public int compareTo(Media other) {
+    		int titleCompare = this.getTitle().compareTo(other.getTitle());
+    		if (titleCompare != 0) return titleCompare;
+    		return Float.compare(other.getCost(), this.getCost());
+	}
+
+3.Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+	Không. Comparable chỉ cho phép định nghĩa một thứ tự tự nhiên duy nhất thông qua phương thức compareTo().
+
+	Nếu muốn có nhiều cách sắp xếp khác nhau, nên dùng Comparator.
+
+4.Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+
+	Triển khai phương thức compare() để so sánh lần lượt theo title, rồi length (giảm dần), rồi cost
+
+	public int compareTo(DigitalVideoDisc other) {
+        int titleCompare = this.getTitle().compareToIgnoreCase(other.getTitle());
+        if (titleCompare != 0) return titleCompare;
+        
+        int lengthCompare = Integer.compare(other.getLength(), this.getLength()); // length giảm dần
+        if (lengthCompare != 0) return lengthCompare;
+        
+        return Float.compare(this.getCost(), other.getCost()); // cost tăng dần
+    }
+    
+

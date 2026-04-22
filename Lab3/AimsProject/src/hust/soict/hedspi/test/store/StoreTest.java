@@ -1,20 +1,27 @@
-package hust.soict.hedspi.aims.store;
+package hust.soict.hedspi.test.store;
 
-import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
-
+import hust.soict.hedspi.aims.media.Book;
+import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+import hust.soict.hedspi.aims.store.Store;
 
 public class StoreTest {
     public static void main(String[] args) {
         Store store = new Store();
 
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("Interstellar", "Sci-Fi", "Christopher Nolan", 169, 29.99f);
-       
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+        Media dvd = new DigitalVideoDisc("Interstellar", "Sci-Fi", "Christopher Nolan", 169, 29.99f);
+        Media book = new Book("The Hobbit", "Fantasy", 15.99f, "J.R.R. Tolkien");
+        Media cd = new CompactDisc("Greatest Hits", "Music", "Various Artists", 19.99f);
 
-        store.addDVD(dvd1);
-        store.addDVD(dvd2);
+        store.addMedia(dvd);
+        store.addMedia(book);
+        store.addMedia(cd);
+        store.printStore();
 
-        store.removeDVD(dvd1);
-        store.removeDVD(dvd1); // test trường hợp không tồn tại
+        store.removeMedia(dvd);
+        store.printStore();
+
+        store.removeMedia(dvd);
     }
 }

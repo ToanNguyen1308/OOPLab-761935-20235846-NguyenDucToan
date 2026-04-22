@@ -1,49 +1,47 @@
 package hust.soict.hedspi.aims.store;
 
-import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+import java.util.ArrayList;
 
 public class Store {
-    public static final int MAX_ITEMS = 100;
+    private ArrayList<Media> itemsInStore = new ArrayList<>();
 
-    private DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[MAX_ITEMS];
-    private int qtyInStore = 0;
-
-    // Add DVD
-    public void addDVD(DigitalVideoDisc dvd) {
-        if (qtyInStore < MAX_ITEMS) {
-            itemsInStore[qtyInStore] = dvd;
-            qtyInStore++;
-            System.out.println("The DVD \"" + dvd.getTitle() + "\" has been added to store");
+    public void addMedia(Media media) {
+        if (itemsInStore.contains(media)) {
+            System.out.println("Item already exists in store: " + media.getTitle());
         } else {
-            System.out.println("The store is full");
+            itemsInStore.add(media);
+            System.out.println("Added to store: " + media.getTitle());
         }
     }
 
-    // Remove DVD
-    public void removeDVD(DigitalVideoDisc dvd) {
-        boolean found = false;
+    public void removeMedia(Media media) {
+        if (itemsInStore.remove(media)) {
+            System.out.println("Removed from store: " + media.getTitle());
+        } else {
+            System.out.println("Item not found in store: " + media.getTitle());
+        }
+    }
 
-        for (int i = 0; i < qtyInStore; i++) {
-            if (itemsInStore[i].equals(dvd)) {
-                found = true;
-
-                // shift left
-                for (int j = i; j < qtyInStore - 1; j++) {
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-
-                itemsInStore[qtyInStore - 1] = null;
-                qtyInStore--;
-
-                System.out.println("The DVD \"" + dvd.getTitle() + "\" has been removed");
-                break;
+    public void printStore() {
+        System.out.println("------ STORE INVENTORY ------");
+        for (Media media : itemsInStore) {
+            System.out.println(media.toString());
+        }
+        System.out.println("-----------------------------");
+    }
+    
+    public Media searchByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
             }
         }
+        System.out.println("No media found with the title: " + title);
+        return null;
+    }
 
-        if (!found) {
-            System.out.println("DVD not found in store");
-        }
+    public ArrayList<Media> getItemsInStore() {
+        return itemsInStore;
     }
 }
-
-    

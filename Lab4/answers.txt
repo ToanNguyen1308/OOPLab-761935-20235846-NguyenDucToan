@@ -1,0 +1,51 @@
+1.3
+Compare Swing and AWT elements:
+
+1. Top-Level Containers (Thành phần chứa cấp cao nhất)
+------------------------------------------------------
+Yếu tố                 | AWT             | Swing
+-----------------------|------------------|------------------------
+Lớp chứa chính         | Frame            | JFrame
+Hộp thoại              | Dialog           | JDialog
+Cửa sổ thông báo       | FileDialog       | JOptionPane, JFileChooser
+Ghi chú                | Native           | Lightweight (thuần Java)
+
+2. Tên lớp của các thành phần (Components)
+------------------------------------------
+Thành phần UI          | AWT              | Swing
+-----------------------|------------------|------------------------
+Nhãn                   | Label            | JLabel
+Nút bấm                | Button           | JButton
+Hộp văn bản            | TextField        | JTextField
+Hộp văn bản nhiều dòng | TextArea         | JTextArea
+Hộp kiểm               | Checkbox         | JCheckBox
+Danh sách chọn         | Choice, List     | JComboBox, JList
+Panel                  | Panel            | JPanel
+Menu                   | Menu, MenuBar    | JMenu, JMenuBar
+Container chính        | Frame            | JFrame
+
+3. Xử lý sự kiện (Event Handling)
+----------------------------------
+Yếu tố                 | AWT                             | Swing
+-----------------------|----------------------------------|-------------------------------------------
+Cơ chế sự kiện         | Java Event Delegation Model     | Cũng sử dụng Event Delegation Model
+Lớp thường dùng        | ActionListener, WindowListener  | ActionListener, MouseListener, ...
+Việc xử lý sự kiện     | Có hạn chế vì dùng native       | Tốt hơn nhờ thành phần lightweight
+
+4. Giao diện người dùng (UI Look & Feel)
+----------------------------------------
+Yếu tố                 | AWT                             | Swing
+-----------------------|----------------------------------|-------------------------------------------
+Giao diện              | Phụ thuộc hệ điều hành          | Độc lập hệ điều hành, tùy biến
+Tùy biến giao diện     | Hạn chế                         | Hỗ trợ Look & Feel như Metal, Nimbus...
+Độ linh hoạt           | Thấp                            | Cao
+
+5. Kết luận
+-----------
+Đặc điểm               | AWT                             | Swing
+-----------------------|----------------------------------|-------------------------------------------
+Dựa trên hệ điều hành  | Có                              | Không (thuần Java)
+Giao diện người dùng   | Cổ điển                         | Hiện đại hơn
+Tên lớp                | Không có tiền tố J              | Có tiền tố J
+Khả năng tùy biến      | Hạn chế                         | Cao
+Phù hợp với            | Ứng dụng đơn giản              | Ứng dụng GUI phức tạp hơn

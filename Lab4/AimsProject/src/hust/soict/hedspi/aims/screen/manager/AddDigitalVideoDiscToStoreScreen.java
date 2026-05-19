@@ -52,6 +52,7 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
                 store.addMedia(dvd);
 
                 JOptionPane.showMessageDialog(null, "DVD added successfully!");
+
                 dispose();
                 new StoreManagerScreen(store);
             }

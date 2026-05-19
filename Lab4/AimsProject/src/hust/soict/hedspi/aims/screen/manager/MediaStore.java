@@ -5,7 +5,8 @@ import hust.soict.hedspi.aims.media.Playable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MediaStore extends JPanel {
     private Media media;
@@ -14,43 +15,42 @@ public class MediaStore extends JPanel {
         this.media = media;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
         JLabel title = new JLabel(media.getTitle());
-        title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 18));
+        title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 15));
         title.setAlignmentX(CENTER_ALIGNMENT);
 
-
-        JLabel cost = new JLabel(media.getCost() + " $");
+        JLabel cost = new JLabel("" + media.getCost() + " $");
         cost.setAlignmentX(CENTER_ALIGNMENT);
 
-
-        this.add(Box.createVerticalGlue());
-        this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 5)));
-        this.add(cost);
-        this.add(Box.createVerticalGlue());
+        JPanel container = new JPanel();
+        container.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         if (media instanceof Playable) {
             JButton playButton = new JButton("Play");
-            playButton.setAlignmentX(CENTER_ALIGNMENT);
-            this.add(playButton);
+            container.add(playButton);
 
             playButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    Playable playable = (Playable) media;
+                    playable.play();
 
-                    ((Playable) media).play();
-
-                    JOptionPane.showMessageDialog(
-                        null,
-                        "Playing " + media.getTitle(),
-                        "Play",
-                        JOptionPane.INFORMATION_MESSAGE
-                    );
+                    JDialog dialog = new JDialog();
+                    dialog.setTitle("Play");
+                    dialog.add(new JLabel("Playing " + media.getTitle()));
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(MediaStore.this);
+                    dialog.setModal(true);
+                    dialog.setVisible(true);
                 }
             });
         }
 
+        this.add(Box.createVerticalGlue());
+        this.add(title);
+        this.add(cost);
+        this.add(Box.createVerticalGlue());
+        this.add(container);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }

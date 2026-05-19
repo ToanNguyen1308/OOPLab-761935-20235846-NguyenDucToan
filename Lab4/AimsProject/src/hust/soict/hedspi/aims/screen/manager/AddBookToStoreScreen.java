@@ -50,8 +50,8 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
 
                 JOptionPane.showMessageDialog(null, "Book added successfully!");
 
-                dispose();  
-                new StoreManagerScreen(store);  
+                dispose();
+                new StoreManagerScreen(store);
             }
         });
 

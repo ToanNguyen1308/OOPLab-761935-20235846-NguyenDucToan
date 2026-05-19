@@ -1,9 +1,8 @@
 package hust.soict.hedspi.aims.screen.manager;
 
 import hust.soict.hedspi.aims.store.Store;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public abstract class AddItemToStoreScreen extends JFrame {
     protected Store store;
@@ -24,7 +23,7 @@ public abstract class AddItemToStoreScreen extends JFrame {
     JPanel createNorth() {
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-        north.add(new StoreManagerScreen(store).createMenuBar());
+        north.add(new StoreManagerScreen(store, false).createMenuBar(this));
         return north;
     }
 }

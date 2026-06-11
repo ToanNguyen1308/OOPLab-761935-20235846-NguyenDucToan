@@ -32,6 +32,7 @@ public class DigitalVideoDisc extends Disc implements Playable {
                + this.getDirector() + " - " + this.getLength() + ": " + this.getCost() + " $";
     }
 
+    @Override
     public boolean isMatch(String title) {
         String[] searchWords = title.toLowerCase().split(" ");
         String discTitle = this.getTitle().toLowerCase();
@@ -42,16 +43,6 @@ public class DigitalVideoDisc extends Disc implements Playable {
             }
         }
         return false;
-    }
-
-    public int compareTo(DigitalVideoDisc other) {
-        int titleCompare = this.getTitle().compareToIgnoreCase(other.getTitle());
-        if (titleCompare != 0) return titleCompare;
-
-        int lengthCompare = Integer.compare(other.getLength(), this.getLength());
-        if (lengthCompare != 0) return lengthCompare;
-
-        return Float.compare(this.getCost(), other.getCost());
     }
 
     @Override

@@ -33,7 +33,7 @@ public class Store {
     
     public Media searchByTitle(String title) {
         for (Media media : itemsInStore) {
-            if (media.getTitle().equalsIgnoreCase(title)) {
+            if (media.isMatch(title)) {
                 return media;
             }
         }

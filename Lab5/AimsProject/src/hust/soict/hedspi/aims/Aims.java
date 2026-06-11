@@ -154,7 +154,7 @@ public class Aims {
 
     private static void viewStore() {
         while (true) {
-            store.printStore();;
+            store.printStore();
             storeMenu();
             int choice = getChoice(0, 4);
             switch (choice) {
@@ -395,29 +395,27 @@ public class Aims {
     private static void removeMediaFromCart() {
         System.out.print("Enter title: ");
         String title = scanner.nextLine();
-        for (Media media : cart.getItemsOrdered()) {
-            if (media.getTitle().equalsIgnoreCase(title)) {
-                cart.removeMedia(media);
-                return;
-            }
+        Media media = cart.findInCartByTitle(title);
+        if (media != null) {
+            cart.removeMedia(media);
+        } else {
+            System.out.println("No media found with this title.");
         }
-        System.out.println("No media found with this title.");
     }
 
     private static void playMediaInCart() {
         System.out.print("Enter title: ");
         String title = scanner.nextLine();
-        for (Media media : cart.getItemsOrdered()) {
-            if (media.getTitle().equalsIgnoreCase(title)) {
-                if (media instanceof Playable) {
-                    playMediaSafe((Playable) media);
-                } else {
-                    System.out.println("This media cannot be played!");
-                }
-                return;
+        Media media = cart.findInCartByTitle(title);
+        if (media != null) {
+            if (media instanceof Playable) {
+                playMediaSafe((Playable) media);
+            } else {
+                System.out.println("This media cannot be played!");
             }
+        } else {
+            System.out.println("No media found with this title");
         }
-        System.out.println("No media found with this title");
     }
 
     private static void placeOrder() {

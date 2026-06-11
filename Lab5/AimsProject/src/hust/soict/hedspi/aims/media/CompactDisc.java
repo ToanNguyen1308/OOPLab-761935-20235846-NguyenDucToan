@@ -55,6 +55,9 @@ public class CompactDisc extends Disc implements Playable {
     }
 
     public int getLength() {
+        if (tracks.isEmpty()) {
+            return super.getLength();
+        }
         int totalLength = 0;
         for (Track t : tracks) {
             totalLength += t.getLength();

@@ -42,6 +42,15 @@ public class Cart {
         return itemsOrdered;
     }
 
+    public Media findInCartByTitle(String title) {
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
     public double totalCost() {
         double total = 0;
         for (Media media : itemsOrdered) {

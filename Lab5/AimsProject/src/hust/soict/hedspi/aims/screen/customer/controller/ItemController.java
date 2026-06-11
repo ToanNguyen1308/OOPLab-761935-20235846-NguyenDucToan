@@ -63,11 +63,16 @@ public class ItemController {
 
     @FXML
     void btnPlayClicked(ActionEvent event) {
-    	if (media != null && media instanceof Playable) {
-        	try {
+        if (media != null && media instanceof Playable) {
+            try {
                 ((Playable) media).play();
             } catch (PlayerException e) {
                 System.err.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Playback Error");
+                alert.setHeaderText(null);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
         }
     }
